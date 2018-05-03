@@ -172,7 +172,11 @@ public class QuartzInfoExample {
 #### service层
 ```
  QuartzInfoExample example = new QuartzInfoExample();
- example.createCriteria().andCodeEqualTo(quartzInfo.getCode());
+ example.createCriteria().andCodeEqualTo(quartzInfo.getCode());//单条件
+ example.createCriteria().andYearEqualTo(String.valueOf(startDay.getWeekyear()))
+        .andWeekIdxEqualTo(Long.valueOf(startDay.getWeekOfWeekyear()));//多条件
+ example.createCriteria().andMonthBetween(startMon, endMon); //在两者之间 
+example.setOrderByClause(" month desc");//排序方式
  int num1 = quartzInfoMapper.countByExample(example);
 ```
 #### dao层
@@ -222,6 +226,9 @@ public class QuartzInfoExample {
     select count(*) from ma_quartz_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
     </if>
   </select>
 ```
