@@ -23,6 +23,10 @@ jobs:
         python -m pip install --upgrade pip
         # 安装你的项目依赖，如果有的话
         pip install requests
+        pip install chardet
+        pip install smtplib
+        pip install time
+
 
     - name: Run Python script
       run: python piaoniu.py  # 替换your_script.py为你的Python文件名
