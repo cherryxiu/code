@@ -1,0 +1,28 @@
+name: Deploy Python File
+
+on:
+  push:
+    branches:
+      - master  # 假设你想在推送到main分支时触发部署
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # 使用Python 3.x版本
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # 安装你的项目依赖，如果有的话
+        # pip install -r requirements.txt
+
+    - name: Run Python script
+      run: python piaoniu.py  # 替换your_script.py为你的Python文件名
